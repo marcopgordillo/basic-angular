@@ -24,10 +24,12 @@
 <p>{{ allowNewServer }}</p>
 <!--Property binding-->
 <p [innerText]="allowNewServer"></p>
-<p>{{ serverCreationStatus }}</p>
+<!--<p>{{ serverCreationStatus }}</p>-->
+<p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
 <app-server></app-server>
 <app-server></app-server>
-<hr>
+
+<hr />
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">
