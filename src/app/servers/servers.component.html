@@ -1,11 +1,11 @@
-<div class="input-group input-group-lg">
+<!--<div class="input-group input-group-lg">
   <div class="input-group-prepend">
     <label class="input-group-text">Server Name</label>
   </div>
   <input type="text" class="form-control" aria-label="Server Name"
          aria-describedby="inputGroup-sizing-lg"
          (input)="onUpdateServerName($event)" />
-</div>
+</div>-->
 <div class="input-group input-group-lg">
   <div class="input-group-prepend">
     <label class="input-group-text">Server Name</label>
@@ -15,7 +15,7 @@
          [(ngModel)]="serverName" />
 </div>
 
-<p>{{ serverName }}</p>
+<!--<p>{{ serverName }}</p>-->
 
 <button class="btn btn-primary"
         [disabled] = "!allowNewServer"
