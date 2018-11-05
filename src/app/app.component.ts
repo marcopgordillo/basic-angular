@@ -8,4 +8,8 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'basic-angular';
+  // private numbers: number[] = [1, 2, 3, 4, 5];
+  private oddNumbers: number[] = [1, 3, 5];
+  private evenNumbers: number[] = [2, 4];
+  private onlyOdd: boolean = false;
 }
