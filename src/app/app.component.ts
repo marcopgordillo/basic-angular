@@ -13,5 +13,11 @@ export class AppComponent {
     this.serverElements.push(serverData);
   }
 
-  onBlueprintAdded(): void {}
+  onChangeFirst(): void {
+    this.serverElements[0].name = 'Changed!';
+  }
+
+  onDestroyFirst(): void {
+    this.serverElements.splice(0,1);
+  }
 }
