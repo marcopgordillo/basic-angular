@@ -8,7 +8,7 @@ import {ServerModel} from "../server.model";
 })
 export class CockpitComponent implements OnInit {
 
-  @Output()
+  @Output('srvCreated')
   private serverCreated: EventEmitter<ServerModel> = new EventEmitter<ServerModel>();
 
   private newServerName:string = '';
