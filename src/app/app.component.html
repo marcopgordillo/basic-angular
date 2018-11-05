@@ -7,8 +7,10 @@
       <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy First Component</button>
       <app-server-element *ngFor="let serverElement of serverElements"
                           [name]="serverElement.name">
-        <strong *ngIf="serverElement.type === 'server'" style="color: red;">{{ serverElement.content }}</strong>
-        <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+        <li class="list-group-item" #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red;">{{ serverElement.content }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+        </li>
       </app-server-element>
     </div>
   </div>
