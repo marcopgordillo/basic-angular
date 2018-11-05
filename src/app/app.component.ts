@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ServerModel} from 'server.model';
+import {ServerModel} from './server.model';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,10 @@ import {ServerModel} from 'server.model';
 })
 export class AppComponent {
   private serverElements: ServerModel[] = [];
+
+  onServerAdded(serverData: ServerModel): void {
+    this.serverElements.push(serverData);
+  }
+
+  onBlueprintAdded(): void {}
 }
