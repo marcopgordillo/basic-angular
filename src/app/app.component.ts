@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ServerModel} from './server.model';
 
 @Component({
   selector: 'app-root',
@@ -7,17 +6,16 @@ import {ServerModel} from './server.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private serverElements: ServerModel[] = [];
+  private oddNumbers: number[] = [];
+  private evenNumbers: number[] = [];
+  private numbers: number[] = [];
 
-  onServerAdded(serverData: ServerModel): void {
-    this.serverElements.push(serverData);
-  }
-
-  onChangeFirst(): void {
-    this.serverElements[0].name = 'Changed!';
-  }
-
-  onDestroyFirst(): void {
-    this.serverElements.splice(0,1);
+  public onIntervalFired(firedNumber: number) {
+    /*if (firedNumber % 2 === 0) {
+      this.oddNumbers.push(firedNumber);
+    } else {
+      this.evenNumbers.push(firedNumber);
+    }*/
+    this.numbers.push(firedNumber);
   }
 }
