@@ -10,4 +10,5 @@ export class AppComponent {
   private oddNumbers: number[] = [1, 3, 5];
   private evenNumbers: number[] = [2, 4];
   private onlyOdd: boolean = false;
+  private value: number = 10;
 }
