@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {AccountModel} from '../models/account.model';
 import {LoggingService} from './logging.service';
 
@@ -11,10 +11,20 @@ export class AccountsService {
     new AccountModel('Hidden Account', 'unknown')
   ];
 
+  private _statusUpdated: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() { }
 
   public get accounts(): AccountModel[] {
     return this._accounts;
+  }
+
+  public get statusUpdated(): EventEmitter<string> {
+    return this._statusUpdated;
+  }
+
+  public set statusUpdated(statusUpdated: EventEmitter<string>) {
+    this._statusUpdated = statusUpdated;
   }
 
   public addAccount(account: AccountModel): void {

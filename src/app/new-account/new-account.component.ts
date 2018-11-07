@@ -13,6 +13,9 @@ export class NewAccountComponent implements OnInit {
   constructor(private loggingService: LoggingService, private accountsService: AccountsService) { }
 
   ngOnInit() {
+    this.accountsService.statusUpdated.subscribe(
+      (status: string) => alert('New Status: ' + status)
+    );
   }
 
   public onCreateAccount(accountName: string, accountStatus: string) {
