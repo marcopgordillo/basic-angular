@@ -4,7 +4,9 @@ import {UserModel} from '../models/user.model';
 import {LoggingService} from './logging.service';
 import {CounterService} from './counter.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   private _users: UserModel[] = [
