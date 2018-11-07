@@ -3,24 +3,16 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from '@angular/forms';
-import {AccountComponent} from './account/account.component';
-import {NewAccountComponent} from './new-account/new-account.component';
-import {LoggingService} from './services/logging.service';
-import {AccountsService} from './services/accounts.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccountComponent,
-    NewAccountComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   providers: [
-    LoggingService,
-    AccountsService
   ],
   bootstrap: [AppComponent]
 })
