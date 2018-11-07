@@ -7,6 +7,7 @@ import {ActiveUsersComponent} from './active-users/active-users.component';
 import {InactiveUsersComponent} from './inactive-users/inactive-users.component';
 import {LoggingService} from './services/logging.service';
 import {FilterUsersPipe} from './pipes/filter-users.pipe';
+import {CounterService} from './services/counter.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {FilterUsersPipe} from './pipes/filter-users.pipe';
     FormsModule
   ],
   providers: [
-    LoggingService
+    LoggingService,
+    CounterService
   ],
   bootstrap: [AppComponent]
 })
