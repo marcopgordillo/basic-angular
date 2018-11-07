@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
 import {HeaderComponent} from './header/header.component';
 import {RecipesComponent} from './recipes/recipes.component';
 import {RecipeListComponent} from './recipes/recipe-list/recipe-list.component';
@@ -27,7 +26,6 @@ import {DropdownDirective} from './shared/dropdown.directive';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     BsDropdownModule.forRoot()
   ],
   providers: [],
