@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AccountModel} from "../models/account.model";
+import {AccountModel} from '../models/account.model';
+import {LoggingService} from '../services/logging.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +18,7 @@ export class AccountComponent implements OnInit {
   @Output()
   private statusChanged: EventEmitter<{id: number, newStatus: string}> = new EventEmitter<{id: number, newStatus: string}>();
 
-  constructor() { }
+  constructor(private loggingService: LoggingService) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,6 @@ export class AccountComponent implements OnInit {
       id: this.id,
       newStatus: status
     });
-    console.log('A server status changed, new status: ' + status);
+    this.loggingService.logStatusChanged(status);
   }
 }
