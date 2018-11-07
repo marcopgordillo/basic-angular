@@ -34,6 +34,6 @@ export class ServerComponent implements OnInit, OnDestroy {
   }
 
   onEdit() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
   }
 }
