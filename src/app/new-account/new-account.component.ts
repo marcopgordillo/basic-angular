@@ -19,7 +19,7 @@ export class NewAccountComponent implements OnInit {
 
     this.accountsService.addAccount(new AccountModel(accountName, accountStatus));
 
-    this.loggingService.logStatusChanged(accountStatus);
+    // this.loggingService.logStatusChanged(accountStatus);
   }
 
 }
