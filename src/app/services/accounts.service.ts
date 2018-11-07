@@ -11,7 +11,7 @@ export class AccountsService {
     new AccountModel('Hidden Account', 'unknown')
   ];
 
-  constructor(private loggingService: LoggingService) { }
+  constructor() { }
 
   public get accounts(): AccountModel[] {
     return this._accounts;
@@ -19,11 +19,11 @@ export class AccountsService {
 
   public addAccount(account: AccountModel): void {
     this._accounts.push(account);
-    this.loggingService.logStatusChanged(account.status);
+    LoggingService.logStatusChanged(account.status);
   }
 
   public updateStatus(id: number, newStatus: string) {
     this._accounts[id].status = newStatus;
-    this.loggingService.logStatusChanged(newStatus);
+    LoggingService.logStatusChanged(newStatus);
   }
 }
