@@ -1,4 +1,4 @@
-import {Directive, HostListener, QueryList, ViewChildren} from '@angular/core';
+import {Directive, HostBinding, HostListener, QueryList, ViewChildren} from '@angular/core';
 
 @Directive({
   selector: '[appDropdown]',
@@ -6,7 +6,7 @@ import {Directive, HostListener, QueryList, ViewChildren} from '@angular/core';
 })
 export class DropdownDirective {
 
-  //@HostBinding('class.show')
+  @HostBinding('class.show')
   private isOpen: boolean = false;
 
   @ViewChildren('div')
