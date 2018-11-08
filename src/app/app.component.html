@@ -1,7 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-
+      <form>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email" class="form-control"
+                 ngModel
+                 name="email"
+                 required email />
+          <span class="form-text" *ngIf="">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" class="form-control"
+                 ngModel
+                 name="password"
+                 required />
+        </div>
+        <div class="form-group">
+          <label for="subscription">Choose a Subscription:</label>
+          <select id="subscription" class="custom-control custom-select"
+                  [ngModel]="selectedSubscription"
+                  name="subscription">
+            <option *ngFor="let subscription of subscriptions"
+                    [value]="subscription">{{ subscription }}</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
