@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserModel} from './user/user.model';
 
 @Component({
   selector: 'app-users',
@@ -7,17 +8,8 @@ import {Component} from '@angular/core';
 })
 export class UsersComponent {
   users = [
-    {
-      id: 1,
-      name: 'Max'
-    },
-    {
-      id: 2,
-      name: 'Anna'
-    },
-    {
-      id: 3,
-      name: 'Chris'
-    }
+    new UserModel(1, 'Max'),
+    new UserModel(2, 'Anna'),
+    new UserModel(3, 'Chris')
   ];
 }

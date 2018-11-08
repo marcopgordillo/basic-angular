@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
@@ -17,6 +17,8 @@ import {AuthService} from './auth.service';
 import {AuthGuardService} from './auth-guard.service';
 import {CanDeactivateGuardService} from './servers/edit-server/can-deactivate-guard.service';
 import {ErrorPageComponent} from './error-page/error-page.component';
+import {ServerResolverService} from './servers/server/server-resolver.service';
+
 
 @NgModule({
   declarations: [
@@ -33,14 +35,15 @@ import {ErrorPageComponent} from './error-page/error-page.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [
     ServersService,
     AuthService,
     AuthGuardService,
-    CanDeactivateGuardService
+    CanDeactivateGuardService,
+    ServerResolverService
   ],
   bootstrap: [AppComponent]
 })

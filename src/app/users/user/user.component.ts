@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {Subscription} from "rxjs";
+import {ActivatedRoute, Params} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {UserModel} from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -8,7 +9,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit, OnDestroy {
-  user: {id: number, name: string};
+  user: UserModel;
   paramsSubscription: Subscription;
 
   constructor(private route: ActivatedRoute) { }

@@ -4,6 +4,7 @@ import {ServersService} from '../servers.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {CanComponentDeactivate} from './can-deactivate-guard.service';
+import {ServerModel} from '../server/server.model';
 
 @Component({
   selector: 'app-edit-server',
@@ -12,7 +13,7 @@ import {CanComponentDeactivate} from './can-deactivate-guard.service';
 })
 export class EditServerComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
-  server: {id: number, name: string, status: string};
+  server: ServerModel;
   serverName = '';
   serverStatus = '';
   allowEdit = false;
@@ -27,6 +28,7 @@ export class EditServerComponent implements OnInit, OnDestroy, CanComponentDeact
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
+    console.log('id of server: ' + id);
     this.server = this.serversService.getServer(id);
     this.paramsSubscription = this.route.params.subscribe(
       (params: Params) => {

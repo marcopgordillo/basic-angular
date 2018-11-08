@@ -1,20 +1,10 @@
+import {ServerModel} from './server/server.model';
+
 export class ServersService {
   private servers = [
-    {
-      id: 1,
-      name: 'Productionserver',
-      status: 'online'
-    },
-    {
-      id: 2,
-      name: 'Testserver',
-      status: 'offline'
-    },
-    {
-      id: 3,
-      name: 'Devserver',
-      status: 'offline'
-    }
+    new ServerModel(1, 'ProductionServer', 'online'),
+    new ServerModel(2, 'TestServer', 'offline'),
+    new ServerModel(3, 'DevServer', 'offline')
   ];
 
   getServers() {
