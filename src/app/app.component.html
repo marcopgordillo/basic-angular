@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-12 col-sm-10 col-md-8 offset-sm-1 offset-md-2">
       <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <div id="user-data">
+        <div id="user-data"
+             ngModelGroup="userData"
+             #userData="ngModelGroup">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" class="form-control"
@@ -24,6 +26,10 @@
             </span>
           </div>
         </div>
+        <span class="form-text"
+           *ngIf="!userData.valid && userData.touched">
+          User Data is invalid!
+        </span>
         <div class="form-group">
           <label for="secret">Secret Questions</label>
           <select id="secret" class="form-control custom-control custom-select"
