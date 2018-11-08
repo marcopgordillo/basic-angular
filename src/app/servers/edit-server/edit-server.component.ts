@@ -28,7 +28,6 @@ export class EditServerComponent implements OnInit, OnDestroy, CanComponentDeact
 
   ngOnInit() {
     const id = +this.route.snapshot.params['id'];
-    console.log('id of server: ' + id);
     this.server = this.serversService.getServer(id);
     this.paramsSubscription = this.route.params.subscribe(
       (params: Params) => {
@@ -67,6 +66,6 @@ export class EditServerComponent implements OnInit, OnDestroy, CanComponentDeact
     } else {
       return true;
     }
-  };
+  }
 
 }

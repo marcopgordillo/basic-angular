@@ -21,7 +21,7 @@ export class ServerComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe(
+    this.dataSubscription = this.route.data.subscribe(
       (data: Data) => {
         this.server = data['server'];
       }
