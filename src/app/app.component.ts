@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,14 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   private subscriptions: string[] = ['Basic', 'Advanced', 'Pro'];
-  private selectedSubscription: string = 'Advanced';
+  private selectedSubscription = 'Advanced';
+
+  @ViewChild('signupForm')
+  private signupForm: NgForm;
+
+  onSubmit() {
+    console.log(this.signupForm.value);
+  }
 }

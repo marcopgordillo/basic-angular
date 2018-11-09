@@ -1,21 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <form>
+      <form #signupForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="text" id="email" class="form-control"
                  ngModel
                  name="email"
-                 required email />
-          <span class="form-text" *ngIf="">Please enter a valid email!</span>
+                 required email
+                 #email="ngModel" />
+          <span class="form-text" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" id="password" class="form-control"
                  ngModel
                  name="password"
-                 required />
+                 required
+                 #password="ngModel" />
+          <span class="form-text" *ngIf="!password.valid && password.touched">Please enter a password!</span>
         </div>
         <div class="form-group">
           <label for="subscription">Choose a Subscription:</label>
@@ -26,6 +29,7 @@
                     [value]="subscription">{{ subscription }}</option>
           </select>
         </div>
+        <p *ngIf="!signupForm.valid && signupForm.touched">The form is invalid!</p>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
