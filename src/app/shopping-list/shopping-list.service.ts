@@ -30,7 +30,12 @@ export class ShoppingListService {
     /*for (let ingredient of ingredients) {
       this.addIngredient(ingredient);
     }*/
-    this.ingredients.push(...ingredients);
+    this.ingredients.push(...ingredients); // agrega un array dentro de otro.
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  public updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 }

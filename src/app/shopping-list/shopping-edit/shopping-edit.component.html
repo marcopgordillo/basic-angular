@@ -19,7 +19,10 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <button class="btn btn-success" type="submit" [disabled]="!ingredientForm.valid">Add</button>
+          <button class="btn btn-success" type="submit"
+                  [disabled]="!ingredientForm.valid">
+            {{ editMode ? 'Update' : 'Add' }}
+          </button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-info" type="button">Clear</button>
         </div>
