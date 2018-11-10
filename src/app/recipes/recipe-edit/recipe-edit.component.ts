@@ -33,11 +33,15 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.paramsSubscription.unsubscribe();
   }
 
+  public onSubmit() {
+    console.log(this.recipeForm);
+  }
+
   private initForm() {
 
-    let recipeName: string = '';
-    let recipeImagePath: string = '';
-    let recipeDescription: string = '';
+    let recipeName = '';
+    let recipeImagePath = '';
+    let recipeDescription = '';
 
     if (this.editMode) {
       const recipe: Recipe = this.recipeService.getRecipe(this.id);
