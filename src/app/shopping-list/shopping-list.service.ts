@@ -1,10 +1,11 @@
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
-import {Ingredient} from "../shared/ingredient.model";
+import {Ingredient} from '../shared/ingredient.model';
 
 export class ShoppingListService {
 
   public ingredientsChanged: Subject<Ingredient[]> = new Subject<Ingredient[]>();
+  public startedEditing: Subject<number> = new Subject<number>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
