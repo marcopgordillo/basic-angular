@@ -32,4 +32,8 @@ export class ServerService {
           return throwError('Something went wrong!');
         }));
   }
+
+  getAppName() {
+    return this.http.get(this.backEndUrl + 'AppName.json');
+  }
 }
