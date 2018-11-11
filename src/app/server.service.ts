@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ServerModel} from './server.model';
 import {Observable} from 'rxjs';
 
@@ -12,8 +12,12 @@ export class ServerService {
 
   storeServers(servers: ServerModel[]): Observable<any> {
 
-    const headers = new Headers({'Content-type': 'application/json'});
+    const headers = new HttpHeaders({'Content-type': 'application/json'});
 
     return this.http.post(this.backEndUrl + 'data.json', servers, {headers: headers});
+  }
+
+  getServers() {
+    return this.http.get(this.backEndUrl + 'data.json');
   }
 }

@@ -28,6 +28,15 @@ export class AppComponent {
     );
   }
 
+  onGet() {
+    this.serverService.getServers().subscribe(
+      (response: Response) => {
+        console.log(response);
+      },
+      (error) => console.error(error)
+    );
+  }
+
   private generateId(): number {
     return Math.round(Math.random() * 10000);
   }
