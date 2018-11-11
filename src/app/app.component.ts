@@ -11,7 +11,7 @@ export class AppComponent {
     new ServerModel('medium', 'Production Server', 'stable', new Date(2017, 1, 15)),
     new ServerModel('large', 'User Database', 'stable', new Date(2017, 1, 15)),
     new ServerModel('small', 'Development Server', 'offline', new Date(2017, 1, 15)),
-    new ServerModel('small', 'Testing Server', 'critical', new Date(2017, 1, 15))
+    new ServerModel('small', 'Testing Environment Server', 'critical', new Date(2017, 1, 15))
   ];
 
   getStatusClasses(server: ServerModel) {
