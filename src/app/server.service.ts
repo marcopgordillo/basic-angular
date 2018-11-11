@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ServerModel} from './server.model';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/internal/operators';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/internal/operators';
 
 @Injectable()
 export class ServerService {
@@ -19,12 +19,17 @@ export class ServerService {
   }
 
   getServers() {
-    return this.http.get(this.backEndUrl + 'data.json')
-      .pipe(map((response: any[]) => {
-        for (const server of response) {
-          server.name = 'FETCHED_' + server.name;
-        }
-        return response;
-      }));
+    return this.http.get(this.backEndUrl + 'data')
+      .pipe(
+        map((response: any[]) => {
+          for (const server of response) {
+            server.name = 'FETCHED_' + server.name;
+          }
+          return response;
+      }),
+        catchError((error: Response) => {
+          // return throwError(error);
+          return throwError('Something went wrong!');
+        }));
   }
 }
