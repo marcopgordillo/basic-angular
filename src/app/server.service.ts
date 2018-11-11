@@ -12,6 +12,8 @@ export class ServerService {
 
   storeServers(servers: ServerModel[]): Observable<any> {
 
-    return this.http.post(this.backEndUrl + 'data.json', servers);
+    const headers = new Headers({'Content-type': 'application/json'});
+
+    return this.http.post(this.backEndUrl + 'data.json', servers, {headers: headers});
   }
 }
