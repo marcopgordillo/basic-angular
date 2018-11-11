@@ -13,7 +13,14 @@ export class AppComponent {
     new ServerModel('small', 'Development Server', 'offline', new Date(2017, 1, 15)),
     new ServerModel('small', 'Testing Environment Server', 'critical', new Date(2017, 1, 15))
   ];
+
   private filteredStatus = '';
+
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable');
+    }, 2000);
+  });
 
   getStatusClasses(server: ServerModel) {
     return {

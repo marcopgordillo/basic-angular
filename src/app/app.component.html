@@ -7,6 +7,8 @@
       </div>
       <br />
       <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
+      <br />
+      <h4>App Status: {{ appStatus | async }}</h4>
       <hr />
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center"
