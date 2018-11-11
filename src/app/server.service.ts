@@ -19,5 +19,6 @@ export class ServerService {
 
   getServers() {
     return this.http.get(this.backEndUrl + 'data.json');
+      //.pipe(map((response: Response) => response.json()));
   }
 }
