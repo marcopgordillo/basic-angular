@@ -13,6 +13,7 @@ export class AppComponent {
     new ServerModel('small', 'Development Server', 'offline', new Date(2017, 1, 15)),
     new ServerModel('small', 'Testing Environment Server', 'critical', new Date(2017, 1, 15))
   ];
+  private filteredStatus = '';
 
   getStatusClasses(server: ServerModel) {
     return {
