@@ -18,7 +18,7 @@ export class DataStorageService {
 
   getRecipes() {
     return this.http.get(this.dbUrl + 'recipes.json')
-      .pipe(map((recipes) => {
+      .pipe(map((recipes: Recipe[]) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];
@@ -28,7 +28,7 @@ export class DataStorageService {
         return recipes;
       }))
       .subscribe(
-        (recipes) => this.recipeService.setRecipes(<Recipe[]>recipes)
+        (recipes) => this.recipeService.setRecipes(recipes)
       );
   }
 }
