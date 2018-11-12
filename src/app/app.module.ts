@@ -22,6 +22,7 @@ import {RecipeService} from './recipes/recipe.service';
 import {SignupComponent} from './auth/signup/signup.component';
 import {SigninComponent} from './auth/signin/signin.component';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
     CollapseModule,
     HttpClientModule
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService],
+  providers: [ShoppingListService, RecipeService, DataStorageService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
