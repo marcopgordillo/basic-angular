@@ -4,20 +4,28 @@ import {RecipeService} from '../recipes/recipe.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
 import {Recipe} from "../recipes/recipe.model";
+import {AuthService} from "../auth/auth.service";
 
 @Injectable()
 export class DataStorageService {
 
   dbUrl = 'https://udemy-ng-http-b7747.firebaseio.com/';
 
-  constructor(private http: HttpClient, private recipeService: RecipeService) {}
+  constructor(private http: HttpClient,
+              private recipeService: RecipeService,
+              private authService: AuthService) {}
 
   storeRecipes(): Observable<any> {
-    return this.http.put(this.dbUrl + 'recipes.json', this.recipeService.getRecipes());
+
+    const token = this.authService.getToken();
+
+    return this.http.put(this.dbUrl + 'recipes.json?auth=' + token, this.recipeService.getRecipes());
   }
 
   getRecipes() {
-    return this.http.get(this.dbUrl + 'recipes.json')
+    const token = this.authService.getToken();
+
+    return this.http.get(this.dbUrl + 'recipes.json?auth=' + token)
       .pipe(map((recipes: Recipe[]) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
