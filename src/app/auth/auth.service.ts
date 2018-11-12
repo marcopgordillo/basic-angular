@@ -48,6 +48,18 @@ export class AuthService {
   logout() {
     firebase.auth().signOut();
     this.token = null;
+    this.router.navigate(['/']);
+  }
+
+  loadUser() {
+    firebase.auth().onAuthStateChanged(
+      (currentUser) => {
+        if (currentUser !== null) {
+          currentUser.getIdToken().then(
+            (token: string) => this.token = token
+          );
+        }
+      });
   }
 }
 

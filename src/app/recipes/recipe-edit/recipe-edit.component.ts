@@ -1,21 +1,24 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../recipe.model';
+import {CanComponentDeactivate} from "../../auth/can-deactivate-guard.service";
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit, OnDestroy {
+export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
   private id: number;
   private paramsSubscription: Subscription;
   private editMode = false;
-  recipeForm: FormGroup;
+  private recipeForm: FormGroup;
+  private recipe: Recipe;
+  private changesSaved = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -45,6 +48,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.changesSaved = true;
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
@@ -60,13 +64,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      const recipe: Recipe = this.recipeService.getRecipe(this.id);
-      recipeName = recipe.name;
-      recipeImagePath = recipe.imagePath;
-      recipeDescription = recipe.description;
+      this.recipe = this.recipeService.getRecipe(this.id);
+      recipeName = this.recipe.name;
+      recipeImagePath = this.recipe.imagePath;
+      recipeDescription = this.recipe.description;
 
-      if (recipe['ingredients']) {
-        for (const ingredient of recipe.ingredients) {
+      if (this.recipe['ingredients']) {
+        for (const ingredient of this.recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
@@ -103,5 +107,19 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
     console.log(index);
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.editMode) {
+      return true;
+    }
+
+    if ((this.recipe.name !== this.recipeForm.value.name ||
+         this.recipe.imagePath !== this.recipeForm.value.imagePath ||
+         this.recipe.description !== this.recipeForm.value.description) && !this.changesSaved) {
+      return confirm('Do you want to discard the changes?');
+    } else {
+      return true;
+    }
   }
 }

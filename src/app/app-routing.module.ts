@@ -9,14 +9,14 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {SignupComponent} from "./auth/signup/signup.component";
 import {SigninComponent} from "./auth/signin/signin.component";
 import {AuthGuardService} from "./auth/auth-guard.service";
+import {CanDeactivateGuardService} from "./auth/can-deactivate-guard.service";
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesComponent, children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuardService] },
       { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuardService] }
-
+      { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuardService], canDeactivate: [CanDeactivateGuardService]}
     ] },
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'signup', component: SignupComponent },

@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {Subscription} from 'rxjs';
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-recipe-detail',
@@ -18,7 +19,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -39,12 +41,20 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   onEditRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
-    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['edit'], {relativeTo: this.route});
+      // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
+    } else {
+      this.router.navigate(['signin']);
+    }
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
-    this.router.navigate(['/recipes']);
+    if (this.authService.isAuthenticated()) {
+      this.recipeService.deleteRecipe(this.id);
+      this.router.navigate(['/recipes']);
+    } else {
+      this.router.navigate(['signin']);
+    }
   }
 }

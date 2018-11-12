@@ -24,6 +24,7 @@ import {SigninComponent} from './auth/signin/signin.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AuthService} from "./auth/auth.service";
 import {AuthGuardService} from "./auth/auth-guard.service";
+import {CanDeactivateGuardService} from "./auth/can-deactivate-guard.service";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,14 @@ import {AuthGuardService} from "./auth/auth-guard.service";
     CollapseModule,
     HttpClientModule
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService, AuthService, AuthGuardService],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    DataStorageService,
+    AuthService,
+    AuthGuardService,
+    CanDeactivateGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
