@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CollapseModule} from 'ngx-bootstrap';
+import {BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import {DataStorageService} from './shared/data-storage.service';
 
@@ -39,6 +39,7 @@ import {RecipeService} from './recipes/recipe.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
     CollapseModule,
     HttpClientModule
   ],

@@ -13,4 +13,11 @@ export class DataStorageService {
   storeRecipes(): Observable<any> {
     return this.http.put(this.dbUrl + 'recipes.json', this.recipeService.getRecipes());
   }
+
+  getRecipes() {
+    return this.http.get(this.dbUrl + 'recipes.json')
+      .subscribe(
+        (recipes) => this.recipeService.setRecipes(recipes)
+      );
+  }
 }

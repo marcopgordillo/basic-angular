@@ -16,5 +16,15 @@ export class HeaderComponent {
     this.dataStorageService.storeRecipes().subscribe(
       (data) => console.log(data),
       (error) => console.error(error));
+
+    this.isCollapsedMain = true;
+    this.isCollapsedSub = true;
+  }
+
+  onFetchData() {
+    this.dataStorageService.getRecipes();
+
+    this.isCollapsedMain = true;
+    this.isCollapsedSub = true;
   }
 }
