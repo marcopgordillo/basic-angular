@@ -29,4 +29,8 @@ export class HeaderComponent {
     this.isCollapsedMain = true;
     this.isCollapsedSub = true;
   }
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

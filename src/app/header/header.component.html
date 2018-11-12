@@ -27,6 +27,9 @@
           <a class="nav-link" routerLink="/signin" routerLinkActive="active">Login</a>
         </li>
       </ng-template>
+      <li class="nav-item" *ngIf="authService.isAuthenticated()">
+        <a class="nav-link" (click)="onLogout()">Logout</a>
+      </li>
       <li class="nav-item dropdown" *ngIf="authService.isAuthenticated()">
         <a class="nav-link dropdown-toggle" id="navbarDropdown"
            role="button" data-toggle="dropdown"
