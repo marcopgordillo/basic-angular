@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {RecipeService} from '../recipes/recipe.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
+import {Recipe} from "../recipes/recipe.model";
 
 @Injectable()
 export class DataStorageService {
@@ -27,7 +28,7 @@ export class DataStorageService {
         return recipes;
       }))
       .subscribe(
-        (recipes) => this.recipeService.setRecipes(recipes)
+        (recipes) => this.recipeService.setRecipes(<Recipe[]>recipes)
       );
   }
 }
