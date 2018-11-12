@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
   <a class="navbar-brand" routerLink="/">Recipe Book</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsedMain = !isCollapsedMain">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown" [collapse]="isCollapsedMain">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/recipes">
@@ -19,15 +19,15 @@
       </li>
     </ul>
     <ul class="navbar-nav float-right">
-      <li class="nav-item dropdown" dropdown>
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown"
            role="button" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false"
-           dropdownToggle>
+           (click)="isCollapsedSub = !isCollapsedSub">
           Manage
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>
-          <a class="dropdown-item">Save Data</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" [collapse]="isCollapsedSub">
+          <a class="dropdown-item" (click)="onSaveData()">Save Data</a>
           <a class="dropdown-item">Fetch Data</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item">Something else here</a>
