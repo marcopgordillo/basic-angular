@@ -13,23 +13,23 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {CanDeactivateGuardService} from './auth/can-deactivate-guard.service';
-import {RecipesModule} from './recipes/recipes.module';
 import {SharedModule} from './shared/shared.module';
 import {ShoppingListModule} from './shopping-list/shopping-list.module';
 import {AuthModule} from './auth/auth.module';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     BsDropdownModule.forRoot(),
     CollapseModule,
     HttpClientModule,
-    RecipesModule,
     SharedModule,
     ShoppingListModule,
     AuthModule,
