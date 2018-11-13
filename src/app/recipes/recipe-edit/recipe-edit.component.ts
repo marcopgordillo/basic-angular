@@ -4,7 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../recipe.service';
 import {Recipe} from '../recipe.model';
-import {CanComponentDeactivate} from "../../auth/can-deactivate-guard.service";
+import {CanComponentDeactivate} from '../../auth/can-deactivate-guard.service';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -121,5 +121,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
     } else {
       return true;
     }
+  }
+
+  getIngredientControls() {
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 }
