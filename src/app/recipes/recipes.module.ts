@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
 
@@ -23,7 +22,6 @@ import {SharedModule} from '../shared/shared.module';
     RecipeItemComponent
   ],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     CollapseModule,

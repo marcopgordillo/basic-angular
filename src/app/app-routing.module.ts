@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
-import {NotFoundComponent} from './not-found/not-found.component';
-import {HomeComponent} from './home/home.component';
+import {NotFoundComponent} from './core/not-found/not-found.component';
+import {HomeComponent} from './core/home/home.component';
 import {AuthGuardService} from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
