@@ -23,6 +23,7 @@ import {AuthModule} from '../auth/auth.module';
   ],
   exports: [
     AppRoutingModule,
+    AuthModule,
     HeaderComponent
   ]
 })
