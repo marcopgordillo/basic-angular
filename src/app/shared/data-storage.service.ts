@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RecipeService} from '../recipes/recipe.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
@@ -24,8 +24,17 @@ export class DataStorageService {
 
   getRecipes() {
     const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+    });
 
-    return this.httpClient.get<Recipe[]>(this.dbUrl + 'recipes.json?auth=' + token)
+    const httpOptions: object = {
+      headers: headers,
+      observe: 'body',
+      responseType: 'json'
+    };
+
+    return this.httpClient.get<Recipe[]>(this.dbUrl + 'recipes.json?auth=' + token, httpOptions)
       .pipe(map((recipes) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
