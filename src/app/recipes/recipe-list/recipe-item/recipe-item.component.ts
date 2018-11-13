@@ -9,10 +9,10 @@ import {Recipe} from '../../recipe.model';
 export class RecipeItemComponent implements OnInit {
 
   @Input()
-  private recipe: Recipe;
+  recipe: Recipe;
 
   @Input()
-  private id: number;
+  id: number;
 
   ngOnInit() {
   }

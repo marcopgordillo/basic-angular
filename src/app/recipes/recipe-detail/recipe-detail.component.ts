@@ -13,8 +13,8 @@ import {AuthService} from '../../auth/auth.service';
 })
 export class RecipeDetailComponent implements OnInit, OnDestroy {
 
-  private recipe: Recipe;
-  private id: number;
+  recipe: Recipe;
+  id: number;
   private paramsSubscription: Subscription;
 
   constructor(private recipeService: RecipeService,

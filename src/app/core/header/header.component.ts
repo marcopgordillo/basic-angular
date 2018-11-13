@@ -8,8 +8,8 @@ import {AuthService} from '../../auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  private isCollapsedMain = true;
-  private isCollapsedSub = true;
+  isCollapsedMain = true;
+  isCollapsedSub = true;
 
   constructor(private dataStorageService: DataStorageService,
               private authService: AuthService) {}

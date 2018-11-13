@@ -16,7 +16,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
   private id: number;
   private paramsSubscription: Subscription;
   private editMode = false;
-  private recipeForm: FormGroup;
+  recipeForm: FormGroup;
   private recipe: Recipe;
   private changesSaved = false;
 
