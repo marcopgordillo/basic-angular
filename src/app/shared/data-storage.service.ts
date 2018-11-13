@@ -31,7 +31,7 @@ export class DataStorageService {
       params: params
     };
 
-    const recipes: Recipe[] = this.recipeService.getRecipes()
+    const recipes: Recipe[] = this.recipeService.getRecipes();
 
     return this.httpClient.put(this.dbUrl + 'recipes.json', recipes, httpOptions);
   }
