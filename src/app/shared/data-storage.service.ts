@@ -11,7 +11,7 @@ export class DataStorageService {
 
   dbUrl = 'https://udemy-ng-http-b7747.firebaseio.com/';
 
-  constructor(private http: HttpClient,
+  constructor(private httpClient: HttpClient,
               private recipeService: RecipeService,
               private authService: AuthService) {}
 
@@ -19,14 +19,14 @@ export class DataStorageService {
 
     const token = this.authService.getToken();
 
-    return this.http.put(this.dbUrl + 'recipes.json?auth=' + token, this.recipeService.getRecipes());
+    return this.httpClient.put(this.dbUrl + 'recipes.json?auth=' + token, this.recipeService.getRecipes());
   }
 
   getRecipes() {
     const token = this.authService.getToken();
 
-    return this.http.get(this.dbUrl + 'recipes.json?auth=' + token)
-      .pipe(map((recipes: Recipe[]) => {
+    return this.httpClient.get<Recipe[]>(this.dbUrl + 'recipes.json?auth=' + token)
+      .pipe(map((recipes) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];

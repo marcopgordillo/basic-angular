@@ -11,6 +11,7 @@ import {RecipeService} from '../recipes/recipe.service';
 import {DataStorageService} from '../shared/data-storage.service';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import {AuthService} from '../auth/auth.service';
     NotFoundComponent
   ],
   imports: [
-    SharedModule,
+    HttpClientModule,
     BsDropdownModule.forRoot(),
     CollapseModule,
+    SharedModule,
     AuthModule,
     AppRoutingModule
   ],
