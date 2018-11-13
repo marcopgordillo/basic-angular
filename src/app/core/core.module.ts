@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
@@ -11,7 +12,7 @@ import {RecipeService} from '../recipes/recipe.service';
 import {DataStorageService} from '../shared/data-storage.service';
 import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
-import {HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "../shared/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {HttpClientModule} from "@angular/common/http";
     ShoppingListService,
     RecipeService,
     DataStorageService,
-    AuthService
+    AuthService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class CoreModule {}
