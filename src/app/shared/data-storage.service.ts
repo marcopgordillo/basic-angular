@@ -29,18 +29,13 @@ export class DataStorageService {
       observe: 'body',
       responseType: 'json',
       params: params
+      // reportProgress: true
     };
 
     const recipes: Recipe[] = this.recipeService.getRecipes();
 
-    /*const req = new HttpRequest('PUT', this.dbUrl + 'recipes.json', recipes, {
-      headers: headers,
-      observe: 'body',
-      responseType: 'json',
-      params: params,
-      reportProgress: true
-    });*/
-    // return this.httpClient.request(req);
+    /*const req = new HttpRequest('PUT', this.dbUrl + 'recipes.json', recipes, httpOptions);
+    return this.httpClient.request(req);*/
 
     return this.httpClient.put(this.dbUrl + 'recipes.json', recipes, httpOptions);
   }
