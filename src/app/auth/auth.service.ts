@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
   token: string;
+  private url = '/';
 
   constructor(private router: Router) { }
 
@@ -21,7 +22,8 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          this.router.navigate(['/']);
+          this.router.navigate([this.url]);
+          this.setRedirectUrl('/');
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => this.token = token
@@ -60,6 +62,10 @@ export class AuthService {
           );
         }
       });
+  }
+
+  setRedirectUrl(url: string) {
+    this.url = url;
   }
 }
 

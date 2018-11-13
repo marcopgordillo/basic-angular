@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {Subscription} from 'rxjs';
-import {AuthService} from "../../auth/auth.service";
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -41,12 +41,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   onEditRecipe() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['edit'], {relativeTo: this.route});
-      // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
-    } else {
-      this.router.navigate(['signin']);
-    }
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
   onDeleteRecipe() {

@@ -3,7 +3,7 @@ import {Recipe} from '../recipe.model';
 import {RecipeService} from '../recipe.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {AuthService} from "../../auth/auth.service";
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -33,11 +33,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   onNewRecipe() {
-    if (this.authService.isAuthenticated()) {
       this.router.navigate(['new'], {relativeTo: this.route});
-    } else {
-      this.router.navigate(['signin']);
-    }
-
   }
 }
