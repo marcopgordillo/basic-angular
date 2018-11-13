@@ -34,12 +34,12 @@ import {RecipesModule} from './recipes/recipes.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     BsDropdownModule.forRoot(),
     CollapseModule,
     HttpClientModule,
-    RecipesModule
+    RecipesModule,
+    AppRoutingModule
   ],
   providers: [
     ShoppingListService,
