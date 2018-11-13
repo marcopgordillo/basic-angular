@@ -21,6 +21,7 @@ const recipesRoutes: Routes = [
   imports: [
     RouterModule.forChild(recipesRoutes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CanDeactivateGuardService]
 })
 export class RecipesRoutingModule {}
