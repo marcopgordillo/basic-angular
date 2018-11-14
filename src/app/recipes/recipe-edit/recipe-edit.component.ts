@@ -1,10 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {RecipeService} from '../recipe.service';
-import {Recipe} from '../recipe.model';
-import {CanComponentDeactivate} from '../../auth/can-deactivate-guard.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe.model';
+import { CanComponentDeactivate } from '../../auth/can-deactivate-guard.service';
+import * as RecipeActions from '../store/recipe.actions';
+import * as fromRecipe from '../store/recipe.reducers';
+import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-recipe-edit',
@@ -22,7 +28,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
     this.paramsSubscription = this.route.params.subscribe(
@@ -47,10 +54,15 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
       this.recipeForm.value['ingredients']);*/
 
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      //this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.store.dispatch(new RecipeActions.UpdateRecipe({
+        index: this.id,
+        updatedRecipe: this.recipeForm.value
+      }));
       this.changesSaved = true;
     } else {
-      this.recipeService.addRecipe(this.recipeForm.value);
+      //this.recipeService.addRecipe(this.recipeForm.value);
+      this.store.dispatch(new RecipeActions.AddRecipe(this.recipeForm.value));
     }
 
     this.onCancel();
@@ -64,7 +76,15 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
     const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      this.recipe = this.recipeService.getRecipe(this.id);
+      // this.recipe = this.recipeService.getRecipe(this.id);
+      this.store.select('recipes').pipe(take(1))
+        .subscribe(
+          (recipeState: fromRecipe.State) => {
+            this.recipe = recipeState.recipes[this.id];
+
+          }
+        );
+
       recipeName = this.recipe.name;
       recipeImagePath = this.recipe.imagePath;
       recipeDescription = this.recipe.description;
