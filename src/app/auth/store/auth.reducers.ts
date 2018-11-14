@@ -1,9 +1,5 @@
 import * as AuthActions from './auth.actions';
 
-export interface AppState {
-  shoppingList: State;
-}
-
 export interface State {
   token: string;
   authenticated: boolean;
