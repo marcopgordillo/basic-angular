@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
+import * as fromRecipe from '../store/recipe.reducers';
+import * as RecipeActions from '../store/recipe.actions';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,33 +17,46 @@ import * as fromAuth from '../../auth/store/auth.reducers';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  recipe: Recipe;
+  recipeState: Observable<fromRecipe.State>;
   id: number;
   private isAuthenticated: boolean;
 
   constructor(private recipeService: RecipeService,
               private router: Router,
               private route: ActivatedRoute,
-              private store: Store<fromApp.AppState>) { }
+              private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
 
-    this.store.select('auth').pipe(
-      map((authState: fromAuth.State) => {
+    this.store.select('auth')
+      .pipe(
+        take(1)
+      )
+      .subscribe((authState: fromAuth.State) => {
         this.isAuthenticated = authState.authenticated
-      })
-    );
+      });
 
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.recipe = this.recipeService.getRecipe(this.id);
+        this.recipeState = this.store.select('recipes');
       }
     );
   }
 
   public onAddToShoppingList(): void {
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.select('recipes')
+      .pipe(
+        take(1)
+        )
+      .subscribe(
+        (recipeState: fromRecipe.State) => {
+            this.store.dispatch(new ShoppingListActions.AddIngredients(
+              recipeState.recipes[this.id].ingredients
+            ));
+          }
+        );
+
   }
 
   onEditRecipe() {
@@ -51,7 +65,7 @@ export class RecipeDetailComponent implements OnInit {
 
   onDeleteRecipe() {
     if (this.isAuthenticated) {
-      this.recipeService.deleteRecipe(this.id);
+      this.store.dispatch(new RecipeActions.DeleteRecipe(this.id));
       this.router.navigate(['/recipes']);
     } else {
       this.router.navigate(['signin']);
