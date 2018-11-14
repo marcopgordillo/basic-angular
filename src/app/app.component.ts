@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import {environment} from "../environments/environment";
-import {AuthService} from "./auth/auth.service";
+import { environment } from "../environments/environment";
+import { AuthService } from "./auth/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     firebase.initializeApp(environment.firebase);
-    this.authService.loadUser();
+    // this.authService.loadUser();
   }
 
   public onNavigate(feature: string): void {

@@ -53,7 +53,7 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  /*loadUser() {
+/*  loadUser() {
     firebase.auth().onAuthStateChanged(
       (currentUser) => {
         if (currentUser !== null) {
