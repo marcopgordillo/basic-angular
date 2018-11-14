@@ -9,6 +9,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { CoreModule } from './core/core.module';
 import { reducers } from './store/app.reducers';
 import { AuthEffects } from './auth/store/auth.effects';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AuthEffects } from './auth/store/auth.effects';
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     CoreModule,
     SharedModule,
     ShoppingListModule,

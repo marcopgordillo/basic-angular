@@ -16,7 +16,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
     case AuthActions.SIGNIN:
       return {
         ...state,
-        autenticated: true
+        authenticated: true
       };
     case AuthActions.LOGOUT:
       return {
