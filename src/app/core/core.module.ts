@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BsDropdownModule, CollapseModule} from 'ngx-bootstrap';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {HomeComponent} from './home/home.component';
 import {HeaderComponent} from './header/header.component';
@@ -10,10 +10,9 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {AuthModule} from '../auth/auth.module';
 import {RecipeService} from '../recipes/recipe.service';
 import {DataStorageService} from '../shared/data-storage.service';
-import {ShoppingListService} from '../shopping-list/shopping-list.service';
 import {AuthService} from '../auth/auth.service';
-import {AuthInterceptor} from "../shared/auth.interceptor";
-import {LoggingInterceptor} from "../shared/logging.interceptor";
+import {AuthInterceptor} from '../shared/auth.interceptor';
+import {LoggingInterceptor} from '../shared/logging.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import {LoggingInterceptor} from "../shared/logging.interceptor";
     HeaderComponent
   ],
   providers: [
-    ShoppingListService,
     RecipeService,
     DataStorageService,
     AuthService,
