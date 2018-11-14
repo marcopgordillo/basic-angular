@@ -29,5 +29,6 @@ const initialState: State = {
 };
 
 export function recipeReducer(state = initialState, action) {
+
   return state;
 }
