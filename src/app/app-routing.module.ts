@@ -8,7 +8,7 @@ import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: 'shopping-list', component: ShoppingListComponent },
-  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule', canActivate: [AuthGuardService] },
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule', canLoad: [AuthGuardService], canActivate: [AuthGuardService] },
   { path: 'home', component: HomeComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
