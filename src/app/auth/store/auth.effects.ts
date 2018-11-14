@@ -40,6 +40,35 @@ export class AuthEffects {
       )
     );
 
+  @Effect()
+  authSignin = this.actions$
+    .ofType(AuthActions.TRY_SIGNIN)
+    .pipe(
+      map(
+        (action: AuthActions.TrySignin) => action.payload),
+      switchMap(
+        (authData: {username: string, password: string}) => {
+          return from(firebase.auth().signInWithEmailAndPassword(authData.username, authData.password));
+        }),
+      switchMap(
+        () => {
+          return from(firebase.auth().currentUser.getIdToken());
+        }),
+      mergeMap(
+        (token: string) => {
+          return [
+            {
+              type: AuthActions.SIGNIN
+            },
+            {
+              type: AuthActions.SET_TOKEN,
+              payload: token
+            }
+          ];
+        }
+      )
+    );
+
   constructor(private actions$: Actions) { // $ indicates that is an Observable, but is optional
 
   }
