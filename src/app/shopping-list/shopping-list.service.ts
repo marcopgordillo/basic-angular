@@ -12,17 +12,8 @@ export class ShoppingListService {
     new Ingredient('Tomatoes', 10)
   ];
 
-  public getIngredients(): Ingredient[] {
-    return this.ingredients.slice();
-  }
-
   public getIngredient(index: number) {
     return this.ingredients[index];
-  }
-
-  public addIngredient(ingredient: Ingredient): void {
-    this.ingredients.push(ingredient);
-    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   public addIngredients(ingredients: Ingredient[]): void {
