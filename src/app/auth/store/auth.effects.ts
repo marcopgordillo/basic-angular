@@ -1,11 +1,12 @@
 import { Actions, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { from } from 'rxjs';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import * as AuthActions from './auth.actions';
-import { from } from 'rxjs';
 
 
 @Injectable()
@@ -27,6 +28,7 @@ export class AuthEffects {
         }),
       mergeMap(
         (token: string) => {
+          this.router.navigate(['/']);
           return [
             {
               type: AuthActions.SIGNUP
@@ -56,6 +58,7 @@ export class AuthEffects {
         }),
       mergeMap(
         (token: string) => {
+          this.router.navigate(['/']);
           return [
             {
               type: AuthActions.SIGNIN
@@ -69,7 +72,8 @@ export class AuthEffects {
       )
     );
 
-  constructor(private actions$: Actions) { // $ indicates that is an Observable, but is optional
+  constructor(private actions$: Actions,
+              private router: Router) { // $ indicates that is an Observable, but is optional
 
   }
 }
