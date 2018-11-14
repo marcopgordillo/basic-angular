@@ -1,18 +1,27 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../store/app.reducers';
+import * as AuthActions from './store/auth.actions'
 
 @Injectable()
 export class AuthService {
 
-  token: string;
   private url = '/';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private store: Store<fromApp.AppState>) { }
 
   signupUser(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(
+        user => {
+          this.store.dispatch(new AuthActions.Signup());
+        }
+      )
       .catch(
         error => console.log(error)
       )
@@ -22,11 +31,14 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+          this.store.dispatch(new AuthActions.Signin());
           this.router.navigate([this.url]);
           this.setRedirectUrl('/');
           firebase.auth().currentUser.getIdToken()
             .then(
-              (token: string) => this.token = token
+              (token: string) => {
+                this.store.dispatch(new AuthActions.SetToken(token));
+              }
             );
         }
       )
@@ -35,25 +47,13 @@ export class AuthService {
       );
   }
 
-  getToken(): string {
-    firebase.auth().currentUser.getIdToken()
-      .then(
-        (token: string) => this.token = token
-      );
-    return this.token;
-  }
-
-  isAuthenticated(): boolean {
-    return this.token != null;
-  }
-
   logout() {
     firebase.auth().signOut();
-    this.token = null;
+    this.store.dispatch(new AuthActions.Logout());
     this.router.navigate(['/']);
   }
 
-  loadUser() {
+  /*loadUser() {
     firebase.auth().onAuthStateChanged(
       (currentUser) => {
         if (currentUser !== null) {
@@ -62,7 +62,7 @@ export class AuthService {
           );
         }
       });
-  }
+  }*/
 
   setRedirectUrl(url: string) {
     this.url = url;
