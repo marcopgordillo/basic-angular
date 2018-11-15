@@ -1,10 +1,13 @@
 import { Actions, Effect } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import * as RecipeActions from './recipe.actions';
 import { Recipe } from '../recipe.model';
 
+
+@Injectable()
 export class RecipeEffects {
 
   private dbUrl = 'https://udemy-ng-http-b7747.firebaseio.com/';
@@ -26,7 +29,7 @@ export class RecipeEffects {
             responseType: 'json'
           };
 
-          return this.httpClient.get<Recipe[]>(this.dbUrl + 'recipes.json', httpOptions)
+          return this.httpClient.get<Recipe[]>(this.dbUrl + 'recipes.json', httpOptions);
         }),
       map(
         (recipes) => {
