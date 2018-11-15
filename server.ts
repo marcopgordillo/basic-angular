@@ -24,7 +24,7 @@ const DIST_FOLDER = join(process.cwd(), 'dist');
 const template = readFileSync(join(DIST_FOLDER, 'browser', 'index.html')).toString();
 
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
-const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
+// const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
 
 app.engine('html', (_, options, callback) => {
   renderModuleFactory(AppServerModuleNgFactory, {
