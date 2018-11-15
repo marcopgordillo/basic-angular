@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { RecipeService } from '../recipe.service';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as fromRecipe from '../store/recipe.reducers';
@@ -21,8 +20,7 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
   private isAuthenticated: boolean;
 
-  constructor(private recipeService: RecipeService,
-              private router: Router,
+  constructor(private router: Router,
               private route: ActivatedRoute,
               private store: Store<fromRecipe.FeatureState>) { }
 
@@ -33,7 +31,7 @@ export class RecipeDetailComponent implements OnInit {
         take(1)
       )
       .subscribe((authState: fromAuth.State) => {
-        this.isAuthenticated = authState.authenticated
+        this.isAuthenticated = authState.authenticated;
       });
 
     this.route.params.subscribe(

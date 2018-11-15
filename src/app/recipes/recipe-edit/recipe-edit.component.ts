@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
 import { CanComponentDeactivate } from '../../auth/can-deactivate-guard.service';
 import * as RecipeActions from '../store/recipe.actions';
@@ -28,7 +27,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private recipeService: RecipeService,
               private store: Store<fromRecipe.FeatureState>) { }
 
   ngOnInit() {
@@ -54,14 +52,12 @@ export class RecipeEditComponent implements OnInit, OnDestroy, CanComponentDeact
       this.recipeForm.value['ingredients']);*/
 
     if (this.editMode) {
-      //this.recipeService.updateRecipe(this.id, this.recipeForm.value);
       this.store.dispatch(new RecipeActions.UpdateRecipe({
         index: this.id,
         updatedRecipe: this.recipeForm.value
       }));
       this.changesSaved = true;
     } else {
-      //this.recipeService.addRecipe(this.recipeForm.value);
       this.store.dispatch(new RecipeActions.AddRecipe(this.recipeForm.value));
     }
 
