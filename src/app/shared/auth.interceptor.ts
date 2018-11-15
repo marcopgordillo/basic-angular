@@ -1,8 +1,10 @@
+import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { switchMap, take } from 'rxjs/operators';
+
+import { Store } from '@ngrx/store';
+
 
 import * as fromApp from '../store/app.reducers';
 import * as fromAuth from '../auth/store/auth.reducers';
