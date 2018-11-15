@@ -3,11 +3,13 @@ import * as AuthActions from './auth.actions';
 export interface State {
   token: string;
   authenticated: boolean;
+  url: string;
 }
 
 const initialState: State = {
   token: null,
-  authenticated: false
+  authenticated: false,
+  url: null
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {

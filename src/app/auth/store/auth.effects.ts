@@ -1,13 +1,15 @@
 import { Actions, Effect } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
 import * as AuthActions from './auth.actions';
-
+import * as fromApp from '../../store/app.reducers';
+import * as fromAuth from './auth.reducers';
 
 @Injectable()
 export class AuthEffects {
@@ -58,7 +60,17 @@ export class AuthEffects {
         }),
       mergeMap(
         (token: string) => {
-          this.router.navigate(['/']);
+
+          this.store.select('auth').pipe(take(1))
+            .subscribe(
+              (authState: fromAuth.State) => {
+                if (authState.url != null) {
+                  this.router.navigate([authState.url]);
+                } else {
+                  this.router.navigate(['/']);
+                }
+              });
+
           return [
             {
               type: AuthActions.SIGNIN
@@ -78,13 +90,15 @@ export class AuthEffects {
     .pipe(
       tap(
       () => {
+          firebase.auth().signOut();
           this.router.navigate(['/']);
         }
       )
     );
 
   constructor(private actions$: Actions,
-              private router: Router) { // $ indicates that is an Observable, but is optional
+              private router: Router,
+              private store: Store<fromApp.AppState>) { // $ indicates that is an Observable, but is optional
 
   }
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+
 import { environment } from '../environments/environment';
+import { AppState } from './store/app.reducers';
+import * as AuthActions from './auth/store/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +14,22 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     firebase.initializeApp(environment.firebase);
-    // this.authService.loadUser();
+
+    firebase.auth().onAuthStateChanged(
+      (currentUser) => {
+        if (currentUser) {
+          currentUser.getIdToken().then(
+            (token: string) => {
+              this.store.dispatch(new AuthActions.Signin());
+              this.store.dispatch(new AuthActions.SetToken(token));
+            }
+          );
+        }
+      }
+    );
   }
 }
