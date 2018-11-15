@@ -26,9 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes().subscribe(
-      (data) => console.log(data),
-      (error) => console.error(error));
+    this.store.dispatch(new RecipeActions.StoreRecipes());
 
     this.isCollapsedMain = true;
     this.isCollapsedSub = true;
