@@ -79,4 +79,6 @@ describe('UserComponent', () => {
     fixture.detectChanges();
     tick();
     expect(component.data).toBe('Data');
+  }));
+
 });
