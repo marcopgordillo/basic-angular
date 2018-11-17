@@ -4,3 +4,6 @@ div {
   padding: 10px;
   font-family: sans-serif;
 }
+div > span {
+  font-weight: bold;
+}

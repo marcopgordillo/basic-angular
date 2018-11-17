@@ -3,7 +3,6 @@ import { createCustomElement } from '@angular/elements';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { AlertComponent } from './alert/alert.component';
-import { AlertService } from './alert/alert.service';
 
 
 @Component({

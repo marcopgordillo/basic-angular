@@ -7,16 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AlertComponent implements OnInit {
 
-  private _message: string;
-
   @Input()
-  set message(message: string) {
-    this._message = message;
-  }
-
-  get message(){
-    return this._message;
-  }
+  private message: string;
 
   constructor() { }
 
